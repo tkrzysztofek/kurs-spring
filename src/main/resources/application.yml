@@ -1,7 +1,0 @@
-spring:
-  main:
-    banner-mode: off
-task:
-  template:
-    allowMultipleTasks: true
-
