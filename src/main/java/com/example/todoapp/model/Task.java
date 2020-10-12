@@ -2,6 +2,7 @@ package com.example.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -12,8 +13,20 @@ public class Task {
     @NotBlank(message = "Task's desc must not be null")
     private String description;
     private boolean done;
+    private LocalDateTime deadline;
+
+    private LocalDateTime createdOn;
+    private LocalDateTime updatedOn;
 
     public Task() {
+    }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
     }
 
     public int getId() {
