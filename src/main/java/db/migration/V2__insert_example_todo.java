@@ -10,6 +10,6 @@ public class V2__insert_example_todo extends BaseJavaMigration {
     @Override
     public void migrate(Context context) throws Exception {
         new JdbcTemplate(new SingleConnectionDataSource(context.getConnection(), true))
-                .execute("insert into task");
+                .execute("insert into tasks(description, done) values ('task from migration', true) ");
     }
 }
