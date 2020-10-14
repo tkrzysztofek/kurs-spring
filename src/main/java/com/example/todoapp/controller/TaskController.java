@@ -43,13 +43,18 @@ public class TaskController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
     @PutMapping("/tasks/{id}")
     ResponseEntity<?> updateTask(@PathVariable int id, @RequestBody @Valid Task toUpdate) {
+
         if (!repository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        toUpdate.setId(id);
-        repository.save(toUpdate);
+        repository.findById(id)
+                .ifPresent(task -> {
+                    task.updateFrom(toUpdate);
+                    repository.save(task);
+                });
         return ResponseEntity.noContent().build();
     }
 
@@ -65,7 +70,7 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    ResponseEntity<Task> createTask(@RequestBody @Valid Task toCreate){
+    ResponseEntity<Task> createTask(@RequestBody @Valid Task toCreate) {
         logger.info("Creating new task");
         Task result = repository.save(toCreate);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);

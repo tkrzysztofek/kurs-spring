@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
+//@Inheritance(InheritanceType.)
 @Table(name = "tasks")
 public class Task {
     @Id
@@ -14,9 +15,8 @@ public class Task {
     private String description;
     private boolean done;
     private LocalDateTime deadline;
-
-    private LocalDateTime createdOn;
-    private LocalDateTime updatedOn;
+    @Embedded
+    private Audit audit = new Audit();
 
     public Task() {
     }
@@ -53,14 +53,11 @@ public class Task {
         this.done = done;
     }
 
-    @PrePersist
-    void prePersist(){
-        createdOn = LocalDateTime.now();
+    public void updateFrom(final Task source){
+        description = source.description;
+        done = source.done;
+        deadline = source.deadline;
     }
 
-    @PreUpdate
-    void preUpdate(){
-        updatedOn = LocalDateTime.now();
-    }
 
 }
