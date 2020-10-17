@@ -5,7 +5,6 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
-//@Inheritance(InheritanceType.)
 @Table(name = "tasks")
 public class Task {
     @Id
@@ -17,6 +16,9 @@ public class Task {
     private LocalDateTime deadline;
     @Embedded
     private Audit audit = new Audit();
+    @ManyToOne
+    @JoinColumn(name = "task_group_id")
+    private TaskGroup group;
 
     public Task() {
     }
@@ -27,6 +29,14 @@ public class Task {
 
     public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
+    }
+
+    Audit getAudit() {
+        return audit;
+    }
+
+    void setAudit(Audit audit) {
+        this.audit = audit;
     }
 
     public int getId() {
@@ -57,7 +67,7 @@ public class Task {
         description = source.description;
         done = source.done;
         deadline = source.deadline;
+        group = source.group;
     }
-
 
 }
