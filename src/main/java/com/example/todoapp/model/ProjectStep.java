@@ -2,25 +2,20 @@ package com.example.todoapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
 
 @Entity
-@Table(name = "task_group")
-public class TaskGroup {
+@Table(name = "projects_steps")
+public class ProjectStep {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotBlank(message = "Task group's desc must not be null")
+    @NotBlank(message = "Task's desc must not be null")
     private String description;
-    private boolean done;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
-    private Set<Task> tasks;
+    private int daysToDeadline;
     @ManyToOne
-    @JoinColumn(name = "projects_id")
+    @JoinColumn(name = "project_id")
     private Project project;
-
-    public TaskGroup() {
-    }
 
     public int getId() {
         return id;
@@ -38,12 +33,12 @@ public class TaskGroup {
         this.description = description;
     }
 
-    public boolean isDone() {
-        return done;
+    public int getDaysToDeadline() {
+        return daysToDeadline;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setDaysToDeadline(int daysToDeadline) {
+        this.daysToDeadline = daysToDeadline;
     }
 
     public Project getProject() {
@@ -52,13 +47,5 @@ public class TaskGroup {
 
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
     }
 }
