@@ -1,14 +1,10 @@
 package com.example.todoapp.logic;
 
-import com.example.todoapp.TaskConfigurationProperties;
 import com.example.todoapp.model.TaskGroup;
 import com.example.todoapp.model.TaskGroupRepository;
 import com.example.todoapp.model.TaskRepository;
 import com.example.todoapp.model.projection.GroupReadModel;
 import com.example.todoapp.model.projection.GroupWriteModel;
-import org.hibernate.validator.constraints.ScriptAssert;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -45,6 +41,7 @@ public class TaskGroupService {
         TaskGroup result = repository.findById(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("task with id not found"));
         result.setDone(!result.isDone());
+        repository.save(result);
     }
 
     public void createGroup(int projectId, LocalDateTime deadline){
