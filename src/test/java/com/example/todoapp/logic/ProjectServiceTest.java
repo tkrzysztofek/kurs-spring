@@ -57,7 +57,7 @@ class ProjectServiceTest {
     }
 
     @Test
-    @DisplayName("shuld throw IllegalArgumentException when cos tam")
+    @DisplayName("should throw IllegalArgumentException when cos tam")
     void createGroup_noMultipleGroupsConfig_And_noUndoneGroupsExists_throwsIllegalArgumentException() {
         //given
         var mockRepository = mock(ProjectRepository.class);
