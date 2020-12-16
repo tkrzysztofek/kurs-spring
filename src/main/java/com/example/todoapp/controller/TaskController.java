@@ -43,7 +43,6 @@ public class TaskController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
     @PutMapping("/tasks/{id}")
     ResponseEntity<?> updateTask(@PathVariable int id, @RequestBody @Valid Task toUpdate) {
 
