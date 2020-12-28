@@ -48,5 +48,4 @@ public class ProjectService {
                 }).orElseThrow(() -> new IllegalArgumentException("Project with given id not found"));
         return new GroupReadModel(result);
     }
-
 }

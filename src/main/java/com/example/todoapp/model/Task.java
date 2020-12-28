@@ -23,9 +23,16 @@ public class Task {
     Task() {
     }
 
-    public Task(String description, LocalDateTime deadline){
+    public Task(String description, LocalDateTime deadline) {
+        this(description, deadline, null);
+    }
+
+    public Task(String description, LocalDateTime deadline, TaskGroup group) {
         this.description = description;
         this.deadline = deadline;
+        if (group != null) {
+            this.group = group;
+        }
     }
 
     public LocalDateTime getDeadline() {
@@ -68,7 +75,7 @@ public class Task {
         this.done = done;
     }
 
-    public void updateFrom(final Task source){
+    public void updateFrom(final Task source) {
         description = source.description;
         done = source.done;
         deadline = source.deadline;
